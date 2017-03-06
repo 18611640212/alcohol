@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.customer.domain.mapper.CarMapper">
+
+    <resultMap type="com.customer.domain.Car" id="car">
+        <result column="carId" property="carId"/>
+        <result column="carModel" property="carModel"/>
+        <result column="color" property="color"/>
+        <result column="customerId" property="customerId"/>
+        <result column="insuranceStartDate" property="insuranceStartDate"/>
+        <result column="insuranceEndDate" property="insuranceEndDate"/>
+    </resultMap>
+
+    <select id="getCarAll" resultMap="car">
+        select * from car;
+    </select>
+
+    <select id="getCarByCustomerId" resultMap="car" parameterType="java.lang.String">
+        select * from car where customerId = #{customerId};
+    </select>
+
+
+    <select id="getCarByCustomerIds" resultMap="car" parameterType="java.util.list">
+        select * from car where customerId in (
+        <foreach collection ="list" item="c" index= "index" separator =",">
+            #{c.CustomerId}
+        </foreach>
+        );
+    </select>
+
+
+    <insert id="insert" parameterType="com.customer.domain.Car">
+
+        INSERT INTO car values (
+        #{carId},#{carModel},#{color},
+        #{customerId},#{insuranceStartDate},
+        #{insuranceEndDate}
+        );
+    </insert>
+
+
+
+
+</mapper>

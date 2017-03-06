@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example with a side menu that hides on mobile, just like the Pure website.">
+
+    <title>Responsive Side Menu &ndash; Layout Examples &ndash; Pure</title>
+
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap/bootTable/bootstrap-table.min.css" rel="stylesheet">
+    <script src="/js/jquery/jquery.js"></script>
+    <script src="/js/bootstrap/bootstrap.js" type="text/javascript"></script>
+    <script src="/js/bootstrap/bootbox/bootbox.js" type="text/javascript"></script>
+    <script src="/js/bootstrap/bootTable/bootstrap-table.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap/bootTable/bootstrap-table-locale-all.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap/bootstrap-datetimepicker/amazeui.datetimepicker.min.js"></script>
+    <script src="/js/bootstrap/bootstrap-datetimepicker/amazeui.datetimepicker.zh-CN.js"></script>
+<style>
+
+    /* 顶部导航栏占了 50px，下移内容部分 */
+    body {
+        padding-top: 50px;
+    }
+
+    /* 顶部导航栏，隐藏默认显示的1px边框 */
+    .navbar-fixed-top {
+        border: 0;
+    }
+
+</style>
+</head>
+<body>
+<div id="layout">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-header">
+                <a class="navbar-brand navbar-left" href="#home" data-toggle="tab">小鹏车险</a>
+                <!-- 分辨率低时显示的弹出顶部导航栏的按钮 -->
+                <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#navbar" aria-expanded="true"
+                        aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span>
+                </button>
+##                navbar-right
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">设置</a></li>
+                    <li><a href="#">退出</a></li>
+                </ul>
+            </div>
+    </nav>
+
+    <div id="main">
+        $screen_content
+    </div>
+</div>
+
+</body>
+</html>
