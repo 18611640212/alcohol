@@ -1,4 +1,4 @@
-package com.customer.dao;
+package com.alcoholManage.dao;
 
 import org.springframework.stereotype.Repository;
 
