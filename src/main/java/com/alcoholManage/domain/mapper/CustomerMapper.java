@@ -1,6 +1,6 @@
-package com.customer.domain.mapper;
+package com.alcoholManage.domain.mapper;
 
-import com.customer.domain.Customer;
+import com.alcoholManage.domain.Customer;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.customer.domain;
+package com.alcoholManage.domain;
 
 import lombok.Getter;
 import lombok.Setter;
