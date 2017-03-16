@@ -29,9 +29,9 @@ public class MenuManage {
      */
     Map<String,Menu> permissionMenus = new HashMap<String, Menu>();
 
-    public void getXmlFile(File file) {
-
-
+    public void initMenus() {
+        String classPath = FileUtil.getClassPath();
+        File file = new File(classPath+"");
         Element element = null;
         // documentBuilder为抽象不能直接实例化(将XML文件转换为DOM文件)
         DocumentBuilder db = null;
