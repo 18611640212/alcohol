@@ -38,5 +38,9 @@ public class User {
      * 用户是否有效（是否关注）
      */
     private boolean isValid;
+    /**
+     * 角色id
+     */
+    private String roleId;
 
 }

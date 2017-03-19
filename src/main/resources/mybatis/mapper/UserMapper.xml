@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.customer.domain.mapper.UserMapper">
+
+
+    <select id="insertUser" parameterType="User" resultType="User">
+        select * from car;
+    </select>
+
+
+
+    <insert id="insertUser" parameterType="com.customer.domain.Car">
+
+        INSERT INTO Users values (
+        #{carId},#{carModel},#{color},
+        #{customerId},#{insuranceStartDate},
+        #{insuranceEndDate}
+        );
+    </insert>
+
+
+
+
+</mapper>

@@ -15,7 +15,7 @@ public class Role {
     /**
      * 权限id
      */
-    private int roleId;
+    private String roleId;
     /**
      * 权限名称
      */

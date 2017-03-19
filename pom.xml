@@ -185,12 +185,12 @@
             <artifactId>mybatis-spring</artifactId>
             <version>1.2.2</version>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.6</version>
+            <version>1.16.14</version>
         </dependency>
+
 
         <!--velocity -->
         <!-- http://mvnrepository.com/artifact/org.apache.velocity/velocity -->

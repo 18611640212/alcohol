@@ -1,6 +1,7 @@
 package com.alcoholManage.utils;
 
 import com.alcoholManage.domain.permission.Menu;
+import com.alcoholManage.domain.permission.Role;
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,26 +30,44 @@ public class MenuManage {
      */
     Map<String,Menu> permissionMenus = new HashMap<String, Menu>();
 
-    public void initMenus() {
+    /**
+     * 权限
+     */
+    Map<String,Role> roleMap = new HashMap<String, Role>();
+
+    private static MenuManage menuManage = new MenuManage();
+
+    private MenuManage(){}
+
+    public synchronized static MenuManage getInit(){
+        if(menuManage == null){
+            menuManage = new MenuManage();
+        }
+        return menuManage;
+    }
+
+    public void init(){
+        initMenus();
+        initRole();
+    }
+
+
+    /**
+     * 根据角色id获取相应角色 以及角色的权限
+     * @param id
+     * @return
+     */
+    public Role getRoleById(String id){
+        return roleMap.get(id);
+    }
+
+
+
+    private void initMenus() {
         String classPath = FileUtil.getClassPath();
         File file = new File(classPath+"");
-        Element element = null;
-        // documentBuilder为抽象不能直接实例化(将XML文件转换为DOM文件)
-        DocumentBuilder db = null;
-        DocumentBuilderFactory dbf = null;
         try {
-            // 返回documentBuilderFactory对象
-            dbf = DocumentBuilderFactory.newInstance();
-            // 返回db对象用documentBuilderFatory对象获得返回documentBuildr对象
-            db = dbf.newDocumentBuilder();
-            // 得到一个DOM并返回给document对象
-            Document dt = db.parse(file);
-            // 得到一个elment根元素
-            element = dt.getDocumentElement();
-            // 获得根节点
-            System.out.println("根元素：" + element.getNodeName());
-            // 获得根元素下的子节点
-            NodeList childNodes = element.getChildNodes();
+            NodeList childNodes = FileUtil.getXmlNodeList(file);
 
             // 遍历这些子节点
             for (int i = 0; i < childNodes.getLength(); i++) {
@@ -57,7 +76,7 @@ public class MenuManage {
 
                 // 获得每个对应位置i的结点
                 Node node = childNodes.item(i);
-                if ("Menus".equals(node.getNodeName())) {
+                if ("item".equals(node.getNodeName())) {
                     String name = node.getAttributes().getNamedItem("name").getNodeValue();
                     if (StringUtils.isEmpty(name.trim())) {
                         continue;
@@ -78,9 +97,46 @@ public class MenuManage {
                         menus.add(menu);
                 }
             }
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
+
+    }
+
+    private void initRole(){
+        String classPath = FileUtil.getClassPath();
+        File file = new File(classPath+"");
+        try {
+            NodeList childNodes = FileUtil.getXmlNodeList(file);
+            // 遍历这些子节点
+            for (int i = 0; i < childNodes.getLength(); i++) {
+                Role role = new Role();
+                // 获得每个对应位置i的结点
+                Node node = childNodes.item(i);
+
+                if ("item".equals(node.getNodeName())) {
+                    String name = node.getAttributes().getNamedItem("name").getNodeValue();
+                    role.setRoleName(name);
+                    String id = node.getAttributes().getNamedItem("id").getNodeValue();
+                    role.setRoleId(id);
+                    List<Menu> menuList = new ArrayList<Menu>();
+                    Node menuListNode = node.getFirstChild();
+                    NodeList nodes = menuListNode.getChildNodes();
+                    for(int j = 0;j < nodes.getLength(); i++){
+                         Node menuNode = nodes.item(i);
+                        if("item".equals(menuNode.getNodeName())){
+                            Menu menu = permissionMenus.get(menuNode.getAttributes().getNamedItem("ref"));
+                            menuList.add(menu);
+                        }
+                    }
+                    roleMap.put(role.getRoleId(),role);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 
 }
